@@ -4,6 +4,7 @@ import Container from './components/Container/Container';
 import Section from './components/Section/Section';
 import FormAddContact from './components/FormAddContact/FormAddContact';
 import ContactsList from './components/ContactsList/ContactsList';
+import Filter from './components/Fliter/Filter';
 
 class App extends Component {
   state = {
@@ -29,6 +30,28 @@ class App extends Component {
 
       return { contacts: [...prevState.contacts, data] };
     });
+  };
+
+  deleteContact = currentId => {
+    this.setState(prevState => {
+      return {
+        contacts: [
+          ...prevState.contacts.filter(contact => contact.id !== currentId),
+        ],
+      };
+    });
+  };
+
+  changeFilter = event => {
+    this.setState({ filter: event.currentTarget.value.toLocaleLowerCase() });
+  };
+
+  onFilter = () => {
+    const { contacts, filter } = this.state;
+
+    return contacts.filter(contact =>
+      contact.name.toLocaleLowerCase().includes(filter),
+    );
   };
 
   // handleNameChange = event => {
@@ -58,7 +81,21 @@ class App extends Component {
         </Section>
 
         <Section title="Contacts">
-          <ContactsList contacts={this.state.contacts} />
+          <Filter
+            filter={this.state.filter}
+            onChangeFilter={this.changeFilter}
+          />
+          {this.state.filter === '' ? (
+            <ContactsList
+              contacts={this.state.contacts}
+              deleteContact={this.deleteContact}
+            />
+          ) : (
+            <ContactsList
+              contacts={this.onFilter()}
+              deleteContact={this.deleteContact}
+            />
+          )}
         </Section>
       </Container>
     );

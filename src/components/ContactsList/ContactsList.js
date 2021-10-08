@@ -1,4 +1,6 @@
-const ContactsList = ({ contacts }) => {
+import PropTypes from 'prop-types';
+
+const ContactsList = ({ contacts, deleteContact }) => {
   // console.log(contacts);
 
   return (
@@ -9,11 +11,24 @@ const ContactsList = ({ contacts }) => {
             <span>
               {contact.name}: {contact.number}
             </span>
+
+            <button
+              type="button"
+              id={contact.id}
+              onClick={() => deleteContact(contact.id)}
+            >
+              Delete
+            </button>
           </li>
         );
       })}
     </ul>
   );
+};
+
+ContactsList.propTypes = {
+  contacts: PropTypes.array,
+  deleteContact: PropTypes.func,
 };
 
 export default ContactsList;
