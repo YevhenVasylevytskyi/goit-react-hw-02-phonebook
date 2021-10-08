@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
+import style from './FormAddContact.module.css';
 
 class FormAddContact extends Component {
   loginInputId = shortid.generate();
@@ -45,13 +46,11 @@ class FormAddContact extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <label htmlFor={this.loginInputId}>Name </label>
-        </div>
-
-        <div>
+      <form className={style.form} onSubmit={this.handleSubmit}>
+        <label className={style.label} htmlFor={this.loginInputId}>
+          Name
           <input
+            className={style.input}
             type="text"
             name="name"
             placeholder="Name"
@@ -62,14 +61,12 @@ class FormAddContact extends Component {
             value={this.state.name}
             onChange={this.handleChange}
           />
-        </div>
+        </label>
 
-        <div>
-          <label htmlFor={this.numberInputId}>Namber </label>
-        </div>
-
-        <div>
+        <label className={style.label} htmlFor={this.numberInputId}>
+          Namber
           <input
+            className={style.input_number}
             type="tel"
             name="number"
             placeholder="Namber"
@@ -80,11 +77,10 @@ class FormAddContact extends Component {
             value={this.state.number}
             onChange={this.handleChange}
           />
-        </div>
-
-        <div>
-          <button type="submit">Add contact</button>
-        </div>
+        </label>
+        <button className={style.button} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }
