@@ -3,8 +3,9 @@ import { Component } from 'react';
 import Container from './components/Container/Container';
 import Section from './components/Section/Section';
 import FormAddContact from './components/FormAddContact/FormAddContact';
+import ContactsList from './components/ContactsList/ContactsList';
 
-class Phonebook extends Component {
+class App extends Component {
   state = {
     contacts: [],
     name: '',
@@ -41,10 +42,12 @@ class Phonebook extends Component {
           />           */}
         </Section>
 
-        <Section title="Contacts"></Section>
+        <Section title="Contacts">
+          <ContactsList />
+        </Section>
       </Container>
     );
   }
 }
 
-export default Phonebook;
+export default App;
